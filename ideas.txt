@@ -1,0 +1,10 @@
+The goal is to somehow figure out which characteristics reflect the personality traits best.
+How to figure that out?
+
+God knows
+
+let's try feature extraction of the characters.
+
+Idea: Figure out different features of characters in handwriting. Try to relate and see if there is any co-relation b/w any characteristics and any of the OCEAN traits. If so, by how much? (Later: is the effect causal?)
+
+What are the different features? How do they pan out? etc. etc.
