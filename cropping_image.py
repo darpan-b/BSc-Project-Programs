@@ -10,7 +10,7 @@ def display_image(curimg, imgname):
     cv.destroyAllWindows()
 
 
-raw_img = cv.imread(r'C:\Users\DARPAN\Documents\College\6th Semester\BSc Project (DSE6)\Data\358_0014.png')
+raw_img = cv.imread(r'C:\Users\DARPAN\Documents\College\6th Semester\BSc Project (DSE6)\Data\305_0014.png')
 
 img_copy = np.array(raw_img)
 img_copy2 = np.array(raw_img)
@@ -45,7 +45,7 @@ for cnt in contours:
     if lw * lh < w * h:
         lx, ly, lw, lh = x, y, w, h
 
-cropped = raw_img[ly:ly+lh, lx:lx+lw]
+cropped = red_mask[ly:ly+lh, lx:lx+lw]
 
 cv.imwrite('cropped.png', cropped)
 
