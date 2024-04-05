@@ -35,7 +35,7 @@ def highlight_feature(mask, img):
 
 cropped_img = cv.imread('cropped.png',0)
 ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
-mask = np.zeros((5,15), np.uint8)
+mask = np.zeros((1,len(bin_image)), np.uint8)
 
 result = highlight_feature(mask, bin_image)
 cv.imwrite("result.png", result)
