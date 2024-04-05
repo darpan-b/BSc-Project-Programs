@@ -12,6 +12,9 @@ def display_image(curimg, imgname):
 cropped_img = cv.imread('cropped.png',0)
 ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
 
+
+
+
 working_image = cv.bitwise_not(bin_image)
 # display_image(cropped_img, 'cropped_img')
 # display_image(bin_image, 'bin image')
@@ -40,6 +43,8 @@ cv.imwrite("black_mask.png", mask)
 
 working_image2 = np.array(working_image)
 
+'''
+puro 1 ghonta time laglo run korte sala
 for i in range(80,len(working_image)-5,5):
     for j in range(0,len(working_image)-15,15):
         mask[i:i+5, j:j+15] = 255
@@ -53,4 +58,21 @@ for i in range(80,len(working_image)-5,5):
         mask[i:i+5, j:j+15] = 0
 
 cv.imwrite("straight_lines_img.png", working_image2)
-        
+'''
+
+
+'''
+TRYING A MANUAL APPROACH
+
+1 x row length er matrix diye try kori
+after all that is found we'll count number of connected components
+and compare the number of connected components for finding a metric
+'''
+
+# LINE COUNT = 50
+
+
+
+
+
+
