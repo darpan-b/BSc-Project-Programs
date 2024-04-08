@@ -10,7 +10,7 @@ def display_image(curimg, imgname):
     cv.destroyAllWindows()
 
 
-raw_img = cv.imread(r'C:\Users\DARPAN\Documents\College\6th Semester\BSc Project (DSE6)\Data\358_0013.png')
+raw_img = cv.imread(r'C:\Users\DARPAN\Documents\College\6th Semester\BSc Project (DSE6)\Data\350_0018.png')
 
 img_copy = np.array(raw_img)
 img_copy2 = np.array(raw_img)
