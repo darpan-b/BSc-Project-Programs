@@ -1,3 +1,6 @@
 - kotota circular
 - kotota straight
 - kotota slant (jei dike slant thakbe oi diker weight ta beshi thakbe)
+
+
+- rectangle er theke MEDIAN height ar width ta peye jabo
