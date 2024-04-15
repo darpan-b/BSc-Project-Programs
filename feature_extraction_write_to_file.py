@@ -1,3 +1,7 @@
+''' TODO: Y FEATURE VECTOR MODIFY KORE RUN KORTE HOBE '''
+
+
+
 import cropping_image
 import straight_lines
 import find_min_bounding_circles_and_rectangles
@@ -58,4 +62,6 @@ with open(filename, 'w') as csvfile:
 	csvwriter.writerows(rows)
 
 csvfile.close()
+
+
 
