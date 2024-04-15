@@ -17,55 +17,69 @@ def find_contours(img):
     cv.imwrite("contours_drawn_img.png", res_img)
     return contours, res_img
 
-cropped_img = cv.imread('cropped.png',0)
-ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
-contours_arr, contours_img = find_contours(bin_image)
+def main():
 
-rect_img = np.array(contours_img)
+    cropped_img = cv.imread('cropped.png',0)
+    ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
+    contours_arr, contours_img = find_contours(bin_image)
 
-widths = np.array([])
-heights = np.array([])
-rratios = np.array([])
+    rect_img = np.array(contours_img)
 
-for e in contours_arr:
-    cnt = e
+    widths = np.array([])
+    heights = np.array([])
+    rratios = np.array([])
 
-    # compute straight bounding rectangle
-    x,y,w,h = cv.boundingRect(cnt)
-    # rect_img = cv.drawContours(rect_img,[cnt],0,(255,255,0),2)
+    for e in contours_arr:
+        cnt = e
 
-    # print("w*h = ", w*h, "contour area = ", cv.contourArea(e))
-    if w*h >= 500:
-        rect_img = cv.rectangle(rect_img,(x,y),(x+w,y+h),(255,0,0),2)
-        widths = np.append(widths, w)
-        heights = np.append(heights, h)
-        rratios = np.append(rratios, cv.contourArea(e)/(w*h))
+        # compute straight bounding rectangle
+        x,y,w,h = cv.boundingRect(cnt)
+        # rect_img = cv.drawContours(rect_img,[cnt],0,(255,255,0),2)
 
-cv.imwrite("rectangles_drawn_over_contours.png", rect_img)
+        # print("w*h = ", w*h, "contour area = ", cv.contourArea(e))
+        if w*h >= 500:
+            rect_img = cv.rectangle(rect_img,(x,y),(x+w,y+h),(255,0,0),2)
+            widths = np.append(widths, w)
+            heights = np.append(heights, h)
+            rratios = np.append(rratios, cv.contourArea(e)/(w*h))
 
-circ_img = np.array(contours_img)
+    cv.imwrite("rectangles_drawn_over_contours.png", rect_img)
 
-radiuses = np.array([])
-cratios = np.array([])
+    circ_img = np.array(contours_img)
 
-for e in contours_arr:
-    cnt = e
-    
-    (x_axis,y_axis),radius = cv.minEnclosingCircle(cnt) 
-    
-    center = (int(x_axis),int(y_axis)) 
-    radius = int(radius) 
-    if radius >= 20:
-        cv.circle(circ_img,center,radius,(0,0,255),2) 
-        radiuses = np.append(radiuses, radius)
-        cratios = np.append(rratios, cv.contourArea(e)/(math.pi*radius*radius))
+    radiuses = np.array([])
+    cratios = np.array([])
 
-cv.imwrite("circles_drawn_over_contours.png", circ_img)
+    for e in contours_arr:
+        cnt = e
+        
+        (x_axis,y_axis),radius = cv.minEnclosingCircle(cnt) 
+        
+        center = (int(x_axis),int(y_axis)) 
+        radius = int(radius) 
+        if radius >= 20:
+            cv.circle(circ_img,center,radius,(0,0,255),2) 
+            radiuses = np.append(radiuses, radius)
+            cratios = np.append(rratios, cv.contourArea(e)/(math.pi*radius*radius))
 
-print("median height = ", np.median(heights))
-print("median width = ", np.median(widths))
-print("median radius = ", np.median(radiuses))
+    cv.imwrite("circles_drawn_over_contours.png", circ_img)
 
-print("median rectangularity ratio = ", np.median(rratios))
-print("median circularity ratio = ", np.median(cratios))
 
+    MEDIAN_HEIGHT = np.median(heights)
+    MEDIAN_WIDTH = np.median(widths)
+    MEDIAN_RADIUS = np.median(radiuses)
+    MEDIAN_RECTANGULARITY_RATIO = np.median(rratios)
+    MEDIAN_CIRCULARITY_RATIO = np.median(cratios)
+    MEDIAN_RECTANGULAR_AREA = MEDIAN_HEIGHT * MEDIAN_WIDTH
+    MEDIAN_CIRCULAR_AREA = math.pi * MEDIAN_RADIUS * MEDIAN_RADIUS
+
+    print("median height = ", np.median(heights))
+    print("median width = ", np.median(widths))
+    print("median radius = ", np.median(radiuses))
+
+    print("median rectangularity ratio = ", np.median(rratios))
+    print("median circularity ratio = ", np.median(cratios))
+    return MEDIAN_HEIGHT,MEDIAN_WIDTH,MEDIAN_RADIUS,MEDIAN_RECTANGULARITY_RATIO,MEDIAN_CIRCULARITY_RATIO,MEDIAN_RECTANGULAR_AREA,MEDIAN_CIRCULAR_AREA
+
+# if __name__ == '__main__':
+#     main()

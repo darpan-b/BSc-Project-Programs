@@ -33,10 +33,28 @@ def highlight_feature(mask, img):
     return result_img
 
 
-cropped_img = cv.imread('cropped.png',0)
-ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
-mask = np.zeros((2,20), np.uint8)
+def main():
+    cropped_img = cv.imread('cropped.png',0)
+    ret, bin_image = cv.threshold(cropped_img, 155, 255, cv.THRESH_BINARY)
+    mask = np.zeros((5,20), np.uint8)
 
-result = highlight_feature(mask, bin_image)
-cv.imwrite("result.png", result)
+    result = highlight_feature(mask, bin_image)
+    cv.imwrite("result.png", result)
 
+    STRAIGHT_LINES_COUNT = 0
+
+    for i in range(len(result)):
+        blackrun = 0
+        for j in range(len(result[0])):
+            if result[i][j] == 0:
+                blackrun += 1
+            else:
+                if blackrun >= 20:
+                    STRAIGHT_LINES_COUNT += 1
+                blackrun = 0
+
+    print('Straight line count =', STRAIGHT_LINES_COUNT)
+    return STRAIGHT_LINES_COUNT
+
+# if __name__ == '__main__':
+#     main()
