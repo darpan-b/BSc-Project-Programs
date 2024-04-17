@@ -16,20 +16,20 @@ fields = ['No. of straight lines', 'Median height', 'Median width', 'Median radi
 rows = []
 # rows2 = []
 for e in ppl_no:
-	for f in  file_no:
-		my_path = 'C:\\Users\\DARPAN\\Documents\\College\\6th Semester\\BSc Project (DSE6)\\Data\\'
-		my_path += e+f+'.png'
-		
-		print(my_path)
-		# cropping_image.get_image(my_path)
-		cropping_image.main(my_path) 
-		P1 = straight_lines.main()
-		P2,P3,P4,P5,P6,P7,P8 = find_min_bounding_circles_and_rectangles.main()
-		cur_row = [P1,P2,P3,P4,P5,P6,P7,P8]
-		# cur_row2 = [e,f]
-		# print('cur_row', cur_row)
-		rows.append(cur_row)
-		
+    for f in  file_no:
+        my_path = 'C:\\Users\\DARPAN\\Documents\\College\\6th Semester\\BSc Project (DSE6)\\Data\\'
+        my_path += e+f+'.png'
+        
+        print(my_path)
+        # cropping_image.get_image(my_path)
+        cropping_image.main(my_path) 
+        P1 = straight_lines.main()
+        P2,P3,P4,P5,P6,P7,P8 = find_min_bounding_circles_and_rectangles.main()
+        cur_row = [P1,P2,P3,P4,P5,P6,P7,P8]
+        # cur_row2 = [e,f]
+        # print('cur_row', cur_row)
+        rows.append(cur_row)
+        
 
 
 # name of csv file
@@ -37,14 +37,14 @@ filename = "x_features2.csv"
 
 # writing to csv file
 with open(filename, 'w') as csvfile:
-	# creating a csv writer object
-	csvwriter = csv.writer(csvfile)
+    # creating a csv writer object
+    csvwriter = csv.writer(csvfile)
 
-	# writing the fields
-	csvwriter.writerow(fields)
+    # writing the fields
+    csvwriter.writerow(fields)
 
-	# writing the data rows
-	csvwriter.writerows(rows)
+    # writing the data rows
+    csvwriter.writerows(rows)
 
 csvfile.close()
 
