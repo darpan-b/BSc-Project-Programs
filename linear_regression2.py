@@ -1,11 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import warnings
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_squared_error
+
+warnings.filterwarnings('ignore')
 
 # Create a random dataset
 # rng = np.random.RandomState(1)
@@ -29,10 +32,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, train_size=0.7143, test_size=0.2857, stratify=y
 )
 
-print("X train =", X_train)
-print("y train =", y_train)
-print("X test =", X_test)
-print("y test =", y_test)
+# print("X train =", X_train)
+# print("y train =", y_train)
+# print("X test =", X_test)
+# print("y test =", y_test)
 
 max_depth = 30
 regr_multirf = MultiOutputRegressor(
@@ -52,7 +55,13 @@ print("The mean squared error (MSE) on test set: {:.4f}".format(mse))
 
 print(y_multirf)
 print(y_rf)
+rmse_rf = mean_squared_error(y_test, regr_rf.predict(X_test), squared=False)
+print("The mean squared error (MSE) on test set using RF: {:.4f}".format(rmse_rf))
+rmse_mrf = mean_squared_error(y_test, regr_multirf.predict(X_test), squared=False)
+print("The mean squared error (MSE) on test set using multi RF: {:.4f}".format(rmse_mrf))
 
+
+'''
 
 # Plot the results
 plt.figure()
@@ -95,3 +104,4 @@ plt.title("Comparing random forests and the multi-output meta estimator")
 plt.legend()
 plt.show()
 
+'''
