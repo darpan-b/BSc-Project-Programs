@@ -17,7 +17,8 @@ for e in ppl_no:
     E,A,N,C,O = df.iloc[dfi,8], df.iloc[dfi,9], df.iloc[dfi,10], df.iloc[dfi,11], df.iloc[dfi,12]
     P = e
     cur_row = [P,E,A,N,C,O]
-    rows.append(cur_row)
+    for i in range(14):
+        rows.append(cur_row)
 
 
 # name of csv file

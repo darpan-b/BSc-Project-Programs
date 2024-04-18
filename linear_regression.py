@@ -15,16 +15,45 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 
+from sklearn.metrics import mean_squared_error, r2_score
+
+
 warnings.filterwarnings('ignore')
 
-df = pd.read_excel(r'C:\Users\DARPAN\Documents\College\6th Semester\BSc Project (DSE6)\Data\list_big5(1).xlsx')
-print(df)
+df_x = pd.read_csv('x_features2.csv')
+df_y = pd.read_csv('y_features2.csv')
 
-# Assuming df is your DataFrame
-X = df.iloc[:,1:2].values # features
-Y = df.iloc[:,2].values # Target variable
+'''
+Trying to predict extraversion based on circularity ratio
+'''
 
-print('X', X)
-print('Y', Y)
+xd = df_x.iloc[:,5] # features
+yd = df_y.iloc[:,1] # target variable
+
+# Check and handle categorical variables
+label_encoder = LabelEncoder()
+x_categorical = df_x.select_dtypes(include=['object']).apply(label_encoder.fit_transform)
+x_numerical = df_y.select_dtypes(exclude=['object']).values
+xd2 = pd.concat([pd.DataFrame(x_numerical), x_categorical], axis=1).values
+ 
+# Fitting Random Forest Regression to the dataset
+regressor = RandomForestRegressor(n_estimators=10, random_state=0, oob_score=True)
+ 
+# Fit the regressor with x and y data
+regressor.fit(xd2, yd)
+
+# Access the OOB Score
+oob_score = regressor.oob_score_
+print(f'Out-of-Bag Score: {oob_score}')
+ 
+# Making predictions on the same data or new data
+predictions = regressor.predict(xd2)
+ 
+# Evaluating the model
+mse = mean_squared_error(yd, predictions)
+print(f'Mean Squared Error: {mse}')
+ 
+r2 = r2_score(yd, predictions)
+print(f'R-squared: {r2}')
 
 
