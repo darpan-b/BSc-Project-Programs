@@ -81,5 +81,6 @@ def main():
     print("median circularity ratio = ", np.median(cratios))
     return MEDIAN_HEIGHT,MEDIAN_WIDTH,MEDIAN_RADIUS,MEDIAN_RECTANGULARITY_RATIO,MEDIAN_CIRCULARITY_RATIO,MEDIAN_RECTANGULAR_AREA,MEDIAN_CIRCULAR_AREA
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
+    
